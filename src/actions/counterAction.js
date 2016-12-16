@@ -1,13 +1,13 @@
 export const incrementAction = () => {
 	return {
-		type: 'INCREMENT';
+		type: 'INCREMENT'
 	}
 
 }
 
 export const decrementAction = () => {
 	return {
-		type: 'DECREMENT';
+		type: 'DECREMENT'
 	}
 
 }

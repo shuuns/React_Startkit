@@ -3,7 +3,10 @@ import React from 'react';
 class Btn extends React.Component {
 	render() {
 		return (
-			<button onClick={this.props.handleClick}> Click Me </button>
+			<div>
+				<button onClick={this.props.increment}> + </button>
+				<button onClick={this.props.decrement}> - </button>
+			</div>			
 		);
 	}
 }

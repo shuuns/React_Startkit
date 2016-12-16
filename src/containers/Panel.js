@@ -1,32 +1,44 @@
 	import React from 'react';
-	import ReactDOM from 'react-dom';
+	//import ReactDOM from 'react-dom';
+	import { bindActionCreators } from 'redux';
+	import { connect } from 'react-redux';
+
+	// import components
 	import Btn from '../components/Btn.js';
 	import Show from '../components/Show.js';
 
+	// import action
+	import * as counterAction from '../actions/counterAction';
+
 	class Panel extends React.Component {
-	    constructor() {
-	        super();
-	        this.state = {
-	            number: 0
-	        };
-	    }
-	    btnClick = () => {
-	        let newState = {
-	            number: this.state.number + 1
-	        };
-	        this.setState(newState);
-	    };
-	    render() {
-	        return ( < div >
-	            < Show number = { this.state.number }
-	            /> < Btn handleClick = { this.btnClick }
-	            /> < /div>
-	        );
-	    }
+	  constructor(props){
+	    super(props);
+	  }
+
+	  render(){
+	    const {counterReducer, counterAction} = this.props;
+
+	    return (
+	      <div>
+	        <Show number={counterReducer} />
+	        <Btn increment={counterAction.incrementAction} decrement={counterAction.decrementAction} />
+	      </div>
+	    );
+	  }
+	}
+
+	const mapStateToProps = (state) => {
+	  return {
+	    counterReducer: state.counterReducer
+	  }
+	}
+
+	const mapDispatchToProps = (dispatch) => {
+	  return {
+	    counterAction: bindActionCreators(counterAction, dispatch)
+	  }
 	}
 
 
-	ReactDOM.render( < Panel / > , document.getElementById('app'));
 
-
-	export default Panel;
+	export default connect(mapStateToProps, mapDispatchToProps)(Panel);
